@@ -18,11 +18,25 @@ $(document).ready(function () {
 });
 
 function createCard() {
-    $("#box").append('<div class="col-md-3 col-sm-12 col-xs-12" style="margin: 10px"><table><thead><tr><th><div style="style="width: 350px;"><h4 style="text-align: center; color: black">' + cityState + '</h4></div></th></tr></thead><tbody><tr><td><div id="map ' + num + '" style="height: 400px; width: 300px; border: 2px solid black;"></div> <script> var map; var myLatLng = {lat: ' + lat + ', lng: ' + long + '}; function initMap() { map = new google.maps.Map(document.getElementById("map ' + num + '"), { center: {lat: ' + lat + ', lng: ' + long + '}, zoom: 8 }); var marker = new google.maps.Marker({ position: myLatLng, map: map, title: "My Location!" }); } </script> <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVsRDkBuTTQawIiBcs2xrMmMjRARYIHWw&callback=initMap" async defer></script></div></td></tr></tbody></table><br />');
+    $("#box").append('<div class="col-md-3 col-sm-12 col-xs-12" id="' + num + '" style="margin: 10px><table><thead><tr><th><div style="style="width: 350px;"><h4 style="text-align: center; color: black">' + cityState + '</h4><button onclick="removeDiv(' + num + ')"; class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span></button></th></tr></thead><tbody><tr><td><div id="map ' + num + '" style="height: 400px; width: 300px; border: 2px solid black;"> <script> var map; var myLatLng = {lat: ' + lat + ', lng: ' + long + '}; function initMap() { map = new google.maps.Map(document.getElementById("map ' + num + '"), { center: {lat: ' + lat + ', lng: ' + long + '}, zoom: 8 }); var marker = new google.maps.Marker({ position: myLatLng, map: map, title: "My Location!" }); } </script> <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVsRDkBuTTQawIiBcs2xrMmMjRARYIHWw&callback=initMap" async defer></script></td></tr></tbody></table><br /></div>');
 
     num++
 
 }
+
+$("#postalCode").val("");
+        $("#postalCode").focus();
+
+
+$("#" + num).on("click", ".minusbtn", function () {
+    $(this).parent().remove();
+
+    });
+
+function removeDiv(divId) {
+    $("#" + divId).remove();
+}
+        
 
 function lookupLatLong_Complete(result) {
     lat = result.results["0"].geometry.location.lat;
